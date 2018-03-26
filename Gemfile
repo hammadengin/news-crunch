@@ -48,3 +48,6 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
 end
+
+gem 'activeadmin'
+gem "active_material", github: "vigetlabs/active_material"
