@@ -3,7 +3,6 @@ module PasswordComplexity
   #############
   # Methods   #
   #############
-
   # Method for validate :password_complexity to check password validation conditions.
   def password_complexity
     if password.present? and not password.match(PASSWORD_COMPLEXITY)

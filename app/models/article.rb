@@ -3,12 +3,13 @@ class Article < ApplicationRecord
   #################
   # Association   #
   #################
-  belongs_to :user
-  belongs_to :article_type
+
+  belongs_to :admin_user
 
   #################
   # Validations   #
   #################
+
   # validates title presence
   validates :title, :presence => true, length: { maximum: 30 }
 

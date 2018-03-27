@@ -1,5 +1,14 @@
 ActiveAdmin.register AdminUser do
+
+  ##########################
+  # Whitelist Attributes #
+  #########################
+
   permit_params :email, :password, :password_confirmation
+
+  ###########
+  # Index   #
+  ###########
 
   index do
     selectable_column
@@ -11,10 +20,18 @@ ActiveAdmin.register AdminUser do
     actions
   end
 
+  #############
+  # Filters   #
+  #############
+
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
+
+  ##########
+  # Form   #
+  ##########
 
   form do |f|
     f.inputs do

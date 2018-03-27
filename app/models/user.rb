@@ -3,6 +3,7 @@ class User < ApplicationRecord
   #############
   # Includes #
   #############
+
   include PasswordComplexity
 
   ###########
@@ -15,13 +16,6 @@ class User < ApplicationRecord
          :rememberable,
          :trackable,
          :validatable
-
-  #################
-  # Association #
-  #################
-
-  # user has many articles
-  has_many :articles ,   :dependent => :destroy
 
   #################
   # Validations #

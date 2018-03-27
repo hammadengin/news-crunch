@@ -49,5 +49,9 @@ group :test do
   gem 'launchy'
 end
 
+# Active Admin
 gem 'activeadmin'
-gem "active_material", github: "vigetlabs/active_material"
+gem 'arctic_admin'
+
+# Ancestry is a gem that allows the records of a Ruby on Rails ActiveRecord model to be organised as a tree structure (or hierarchy).
+gem 'ancestry'

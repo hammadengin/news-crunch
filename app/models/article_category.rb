@@ -1,8 +1,8 @@
-class Attachment < ApplicationRecord
+class ArticleCategory < ApplicationRecord
 
   #################
   # Association   #
   #################
 
-  belongs_to :article
+  has_ancestry
 end

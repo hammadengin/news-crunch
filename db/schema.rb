@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326130558) do
+ActiveRecord::Schema.define(version: 20180327110227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20180326130558) do
   end
 
   create_table "admin_users", force: :cascade do |t|
+    t.string "gender", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "middle_name"
+    t.string "about"
+    t.date "dob"
+    t.string "phone"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -40,16 +47,22 @@ ActiveRecord::Schema.define(version: 20180326130558) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_admin_users_on_unlock_token", unique: true
   end
 
-  create_table "article_types", force: :cascade do |t|
-    t.string "type"
+  create_table "article_categories", force: :cascade do |t|
+    t.string "article_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_article_categories_on_ancestry"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -57,13 +70,11 @@ ActiveRecord::Schema.define(version: 20180326130558) do
     t.string "mini_description"
     t.text "description"
     t.date "published_date"
-    t.bigint "user_id"
     t.integer "total_views"
-    t.bigint "article_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["article_type_id"], name: "index_articles_on_article_type_id"
-    t.index ["user_id"], name: "index_articles_on_user_id"
+    t.bigint "admin_user_id"
+    t.index ["admin_user_id"], name: "index_articles_on_admin_user_id"
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -78,10 +89,10 @@ ActiveRecord::Schema.define(version: 20180326130558) do
   create_table "social_profiles", force: :cascade do |t|
     t.integer "type"
     t.string "url"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_social_profiles_on_user_id"
+    t.bigint "admin_user_id"
+    t.index ["admin_user_id"], name: "index_social_profiles_on_admin_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,8 +119,7 @@ ActiveRecord::Schema.define(version: 20180326130558) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "articles", "article_types"
-  add_foreign_key "articles", "users"
+  add_foreign_key "articles", "admin_users"
   add_foreign_key "attachments", "articles"
-  add_foreign_key "social_profiles", "users"
+  add_foreign_key "social_profiles", "admin_users"
 end
