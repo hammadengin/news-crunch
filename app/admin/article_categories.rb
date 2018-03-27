@@ -31,7 +31,7 @@ ActiveAdmin.register ArticleCategory do
   form :html => { :enctype => 'multipart/form-data' } do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Article Categories' do
-      f.input :article_type
+      f.input :article_type,  :required => true
     end
     f.actions
   end

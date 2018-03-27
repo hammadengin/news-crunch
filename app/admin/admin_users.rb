@@ -41,12 +41,12 @@ ActiveAdmin.register AdminUser do
 
   form do |f|
     f.inputs do
-      f.input :first_name
+      f.input :first_name,  :required => true
       f.input :middle_name
-      f.input :last_name
+      f.input :last_name,  :required => true
       f.input :about
       f.input :dob
-      f.input :gender
+      f.input :gender, collection: ["Male", "Female"]
       f.input :phone
       f.input :email
       f.input :password

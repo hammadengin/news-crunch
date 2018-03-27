@@ -45,10 +45,10 @@ ActiveAdmin.register Article do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs do
-      f.input :title
-      f.input :mini_description
-      f.input :description
-      f.input :published_date, as: :date_picker
+      f.input :title,  :required => true
+      f.input :mini_description,  :required => true
+      f.input :description,  :required => true
+      f.input :published_date, as: :date_picker,  :required => true
     end
     f.actions
   end
